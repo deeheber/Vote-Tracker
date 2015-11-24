@@ -1,0 +1,29 @@
+body {
+  background-color: rgb(253, 246, 227);
+  color: #444;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin: 3%;
+  padding: 1%;
+}
+h2 {
+  font-size: 2em;
+  margin: 0.5em;
+}
+h3 {
+  margin: 0.5em;
+}
+header {
+  text-transform: uppercase;
+}
+main {
+  margin: 0 auto;
+  /*border: 1px solid black;*/
+}
+article {
+  display: inline-block;
+  width: 40%;
+  padding: 2%;
+  margin: 2% auto;
+  /*border: 1px solid black;*/
+}
