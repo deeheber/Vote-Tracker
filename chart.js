@@ -23,13 +23,13 @@
 
   function newChoices() {
     /***Generate two random numbers***/
-      var randomNum1 = Math.floor((Math.random() * 10) + 1);
-      var randomNum2 =  Math.floor((Math.random() * 10) + 1);
+      var randomNum1 = Math.floor(Math.random() * 10);
+      var randomNum2 =  Math.floor(Math.random() * 10);
 
     /***Check to make sure the two numbers aren't the same***/
        while (randomNum1 == randomNum2) {
-         randomNum1 = Math.floor((Math.random() * 10) + 1);
-         randomNum2 =  Math.floor((Math.random() * 10) + 1);
+         randomNum1 = Math.floor(Math.random() * 10);
+         randomNum2 =  Math.floor(Math.random() * 10);
        }
     /***Write the two choices to the page**/
       var choice1 = document.getElementById("choice1");
