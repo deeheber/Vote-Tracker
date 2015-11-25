@@ -3,30 +3,35 @@
   <head>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script type="text/javascript" async src='favorite.js'></script>
-    <script type="text/javascript" async src="canvasjs.min.js"></script>
+    <script type="text/javascript" src='chart.js'></script>
+    <script type="text/javascript" src="canvasjs.min.js"></script>
   </head>
 
   <body>
     <header>
-      <h2>Time To Cast Your Vote: </h2>
+      <h2>Time To Cast Your Vote! </h2>
       <h3>Click on the color that you prefer</h3>
       <hr>
     </header>
 
     <main>
-      <div id="chartContainer"></div>
-
       <section id="voteArea">
-        <article id="choice1">
-          <p>Image Placeholder</p>
-          <button>Select</button>
-        </article>
-        <article id="choice2">
-          <p>Image Placeholder</p>
-          <button>Select</button>
-        </article>
+        <article id="choice1"></article>
+        <article id="choice2"></article>
       </section>
+      <section id="chartContainer"></section>
     </main>
+
+    <script type="text/javascript">
+     /***Writing two choices to the page***/
+      var choice1 = document.getElementById("choice1");
+      choice1.innerHTML = "<p>Hello world</p>";
+      choice1.innerHTML+= "<button onclick='changeRed()'>Pick me</button>";
+
+      var choice2 = document.getElementById("choice2");
+      choice2.innerHTML = "<p>Hello world</p>";
+      choice2.innerHTML+= "<button onclick='changeRed()'>Pick me</button>";
+    </script>
+
   </body>
 </html>
