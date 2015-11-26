@@ -29,16 +29,14 @@ article {
   /*border: 1px solid black;*/
 }
 
-#chartContainer {
-  height: 50%;
-  width: 70%;
-  margin: 2% auto;
-}
-
-div img {
+img {
   height: 100px;
   width: 200px;
 }
 
-
-
+.canvasjs-chart-container {
+  overflow: hidden;
+  height: 30em;
+  margin: 1% auto;
+  padding: 1%;
+}

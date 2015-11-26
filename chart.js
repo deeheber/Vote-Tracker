@@ -44,10 +44,28 @@
   }
 
   window.onload = function () {
+    CanvasJS.addColorSet("multiColor",
+      [//colorSet Array
+
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "indigo",
+        "violet",
+        "black",
+        "white",
+        "gray"
+      ]);
 
     chart = new CanvasJS.Chart("chartContainer", {
+      colorSet: "multiColor",
+
+      backgroundColor: "#F5DEB3",
 
       title: {text: "Totals"},
+
       data: [//array of dataSeries
         /*** Change type "column" to "bar", "area", "line" or "pie"***/
               {
