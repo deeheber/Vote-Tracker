@@ -34,6 +34,14 @@ img {
   width: 200px;
 }
 
+button {
+  font-size: 1.5em;
+  border-radius: 3px;
+  border: 1px solid gray;
+  margin-top: 3%;
+  text-transform: capitalize;
+}
+
 .canvasjs-chart-container {
   overflow: hidden;
   height: 30em;
