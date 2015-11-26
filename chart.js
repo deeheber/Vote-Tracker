@@ -35,12 +35,16 @@
       var choice1 = document.getElementById("choice1");
       choice1.innerHTML= "";
       choice1.innerHTML+= "<div><img src=' "+ colorData[randomNum1].image +" ' ></div>";
-      choice1.innerHTML+= "<button onclick='vote("+randomNum1+")'>"+colorData[randomNum1].label+"</button>";
+      choice1.innerHTML+= "<button>"+colorData[randomNum1].label+"</button>";
 
       var choice2 = document.getElementById("choice2");
       choice2.innerHTML= "";
       choice2.innerHTML+= "<div><img src=' "+ colorData[randomNum2].image +" ' ></div>";
-      choice2.innerHTML+= "<button onclick='vote("+randomNum2+")'>"+colorData[randomNum2].label+"</button>";
+      choice2.innerHTML+= "<button>"+colorData[randomNum2].label+"</button>";
+
+    /***Add Event Listeners to Buttons***/
+      document.getElementsByTagName("button")[0].addEventListener("click", function(){vote(randomNum1)});
+      document.getElementsByTagName("button")[1].addEventListener("click", function(){vote(randomNum2)});
   }
 
   window.onload = function () {
