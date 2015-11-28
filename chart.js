@@ -71,17 +71,15 @@
        chart.render();
      }
      else {
-       console.log(color + " is checked");
+       //console.log(color + " is checked");
        colorData.push(colorObject[color]);
        for(index=0; index<colorData.length; index++) {
           colorData[index].x = index+1;
        }
-       console.log(colorData);
+       //console.log(colorData);
        chart.render();
 
      }
-    //If false - remove from array/redraw chart
-    //if true - keep it in the array/redraw chart
 
   }
 
