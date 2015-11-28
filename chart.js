@@ -1,16 +1,17 @@
 
   /***    Data Points ***/
   var colorData = new Array();
-  colorData.push({ image: "images/red.jpg", label: "red", y: 18 });
-  colorData.push({ image: "images/orange.jpg", label: "orange", y: 29 });
-  colorData.push({ image: "images/yellow.jpg", label: "yellow", y: 40 });
-  colorData.push({ image: "images/green.jpg", label: "green", y: 34 });
-  colorData.push({ image: "images/blue.jpg", label: "blue", y: 24 });
-  colorData.push({ image: "images/indigo.jpg", label: "indigo", y: 24 });
-  colorData.push({ image: "images/violet.jpg", label: "violet", y: 24 });
-  colorData.push({ image: "images/black.jpg", label: "black", y: 24 });
-  colorData.push({ image: "images/white.jpg", label: "white", y: 24 });
-  colorData.push({ image: "images/gray.jpg", label: "gray", y: 24 });
+  var red = { image: "images/red.jpg", label: "red", x: 1, y: 18 };
+  var orange = { image: "images/orange.jpg", label: "orange", x: 2, y: 29 };
+  var yellow = { image: "images/yellow.jpg", label: "yellow", x: 3, y: 40 };
+  var green = { image: "images/green.jpg", label: "green", x: 4, y: 34 };
+  var blue = { image: "images/blue.jpg", label: "blue", x: 5, y: 24 };
+  var indigo = { image: "images/indigo.jpg", label: "indigo", x: 6, y: 24 };
+  var violet = { image: "images/violet.jpg", label: "violet", x: 7, y: 24 };
+  var black = { image: "images/black.jpg", label: "black", x: 8, y: 24 };
+  var white = { image: "images/white.jpg", label: "white", x: 9, y: 24 };
+  var gray = { image: "images/gray.jpg", label: "gray", x: 10, y: 24 };
+  colorData.push(red, orange, yellow, green, blue, indigo, violet, black, white, gray);
   /***    Chart Object ***/
   var chart = null;
 
@@ -23,13 +24,13 @@
 
   function newChoices() {
     /***Generate two random numbers***/
-      var randomNum1 = Math.floor(Math.random() * 10);
-      var randomNum2 =  Math.floor(Math.random() * 10);
+      var randomNum1 = Math.floor(Math.random() * colorData.length);
+      var randomNum2 =  Math.floor(Math.random() * colorData.length);
 
     /***Check to make sure the two numbers aren't the same***/
        while (randomNum1 == randomNum2) {
-         randomNum1 = Math.floor(Math.random() * 10);
-         randomNum2 =  Math.floor(Math.random() * 10);
+         randomNum1 = Math.floor(Math.random() * colorData.length);
+         randomNum2 =  Math.floor(Math.random() * colorData.length);
        }
     /***Write the two choices to the page**/
       var choice1 = document.getElementById("choice1");
@@ -47,17 +48,43 @@
       document.getElementsByTagName("button")[1].addEventListener("click", function(){vote(randomNum2)});
   }
 
+  /***Hide/Show Colors in the Chart***/
+  function toggleColor(color) {
+    var selectedItem = document.getElementById(color);
+    var selectedArrayItem;
+    //console.log("You picked "+ color +". It is "+ isItChecked.checked);
+    for(index=0; index<colorData.length; index++){
+      if(selectedItem.id == colorData[index].label){
+        //console.log(colorData[index]);
+        selectedArrayItem = colorData[index];
+      }
+    }
+    if (selectedItem.checked == false) {
+       console.log(color +" is unchecked");
+       console.log(colorData.indexOf(selectedArrayItem));
+       colorData.splice(colorData.indexOf(selectedArrayItem), 1);
+       console.log(colorData);
+       chart.render();
+     }
+     else {
+       console.log(color + " is checked");
+     }
+    //If false - remove from array/redraw chart
+    //if true - keep it in the array/redraw chart
+
+  }
+
   window.onload = function () {
     CanvasJS.addColorSet("multiColor",
       [//colorSet Array
 
-        "red",
-        "orange",
-        "yellow",
-        "green",
-        "blue",
-        "indigo",
-        "violet",
+        // "red",
+        // "orange",
+        // "yellow",
+        // "green",
+        // "blue",
+        // "indigo",
+        // "violet",
         "black",
         "white",
         "gray"
