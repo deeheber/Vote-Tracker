@@ -138,14 +138,16 @@
 
     drawCheckBox();
     var inputs = document.getElementsByTagName("label");
-      for(index=0; index<inputs.length; index++) {
+    for(index=0; index<inputs.length; index++) {
       document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
     }
     chart.render();
+    newChoices();
   }
 
   function resetStyle(event) {
     event.target.setAttribute("class", "normal");
+
   }
 
   window.onload = function () {
