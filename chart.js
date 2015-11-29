@@ -60,35 +60,48 @@
   }
 
   /***Hide/Show Colors in the Chart***/
+  var priorItemsHidden = new Array();
   function toggleColor(color) {
     var selectedItem = document.getElementById(color);
     var selectedArrayItem;
     //console.log("You picked "+ color +". It is "+ isItChecked.checked);
-    for(index=0; index<colorData.length; index++){
-      if(selectedItem.id == colorData[index].label){
-        //console.log(colorData[index]);
-        selectedArrayItem = colorData[index];
-      }
-    }
+
     if (selectedItem.checked == false) {
        //console.log(color +" is unchecked");
-       //console.log(colorData.indexOf(selectedArrayItem));
-       colorData.splice(colorData.indexOf(selectedArrayItem), 1);
-       console.log(colorData);
-        for(index=0; index<colorData.length; index++) {
-           colorData[index].x = index+1;
+       selectedItem.setAttribute("checked", "false");
+      for(index=0; index<colorData.length; index++){
+        if(selectedItem.id == colorData[index].label){
+          //console.log(colorData[index]);
+          selectedArrayItem = colorData[index];
         }
+      }
+       var currentHideItem = new Array();
+       currentHideItem = colorData.slice(colorData.indexOf(selectedArrayItem), colorData.indexOf(selectedArrayItem)+1 );
+       priorItemsHidden = priorItemsHidden.concat(currentHideItem);
+       colorData.splice(colorData.indexOf(selectedArrayItem), 1);
+       //console.log(priorItemsHidden);
+         // for(index=0; index<colorData.length; index++) {
+         //    colorData[index].x = index+1;
+         // }
        chart.render();
      }
      else {
        //console.log(color + " is checked");
-       colorData.push(colorObject[color]);
-      for(index=0; index<colorData.length; index++) {
-           colorData[index].x = index+1;
-        }
-       //console.log(colorData);
-       chart.render();
+       selectedItem.setAttribute("checked", "true");
+       for(index=0; index< priorItemsHidden.length; index++){
+          if(selectedItem.id == priorItemsHidden[index].label) {
+            selectedArrayItem = priorItemsHidden[index];
+          }
+       }
+       //colorData.push(colorObject[color]);
+       console.log(selectedArrayItem);
+       colorData.push(selectedArrayItem);
 
+       // for(index=0; index<colorData.length; index++) {
+       //      colorData[index].x = index+1;
+       //   }
+       chart.render();
+       priorItemsHidden.splice(priorItemsHidden.indexOf(selectedArrayItem), 1);
      }
 
   }
@@ -135,7 +148,6 @@
     for(index=0; index<colorData.length; index++){
       colorData[index].x = index+1;
     }
-
     drawCheckBox();
     var inputs = document.getElementsByTagName("label");
     for(index=0; index<inputs.length; index++) {
@@ -172,6 +184,8 @@
       backgroundColor: "#F5DEB3",
 
       title: {text: "Totals"},
+
+      axisX:{interval: 1,},
 
       data: [//array of dataSeries
         /*** Change type "column" to "bar", "area", "line" or "pie"***/
