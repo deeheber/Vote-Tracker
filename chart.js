@@ -23,6 +23,16 @@
 
   }
 
+  function drawCheckBox() {
+    var toggleArea = document.getElementById("toggle");
+    toggleArea.innerHTML = "";
+    for(index=0; index<colorData.length; index++){
+      var colorItem = colorData[index];
+      var checkBox = "<label for='"+colorItem.label+"' draggable='true' class='normal' data-index="+index+"><input type='checkbox' id='"+colorItem.label+"' checked='true'>"+colorItem.label+"</label>";
+      toggleArea.innerHTML += checkBox;
+    }
+  }
+
   function newChoices() {
     /***Generate two random numbers***/
       var randomNum1 = Math.floor(Math.random() * colorData.length);
@@ -64,23 +74,78 @@
        //console.log(color +" is unchecked");
        //console.log(colorData.indexOf(selectedArrayItem));
        colorData.splice(colorData.indexOf(selectedArrayItem), 1);
-       //console.log(colorData);
-       for(index=0; index<colorData.length; index++) {
-          colorData[index].x = index+1;
-       }
+       console.log(colorData);
+        for(index=0; index<colorData.length; index++) {
+           colorData[index].x = index+1;
+        }
        chart.render();
      }
      else {
        //console.log(color + " is checked");
        colorData.push(colorObject[color]);
-       for(index=0; index<colorData.length; index++) {
-          colorData[index].x = index+1;
-       }
+      for(index=0; index<colorData.length; index++) {
+           colorData[index].x = index+1;
+        }
        //console.log(colorData);
        chart.render();
 
      }
 
+  }
+  /***Drag and Drop Stuff***/
+
+  window.addEventListener("load", initializeDragItems);
+
+  function initializeDragItems() {
+    var list = document.getElementById("toggle");
+    list.addEventListener("dragstart", startDrag);
+    list.addEventListener("dragover", dragOverItem);
+    list.addEventListener("drop", dropItem);
+    list.addEventListener("dragleave", resetStyle);
+    drawCheckBox();
+    newChoices();
+    /***Event Listener for color checkboxes***/
+    var inputs = document.getElementsByTagName("label");
+    for(index=0; index<inputs.length; index++) {
+      document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
+    }
+  }
+
+  function startDrag(event){
+    event.dataTransfer.setData("text/plain", event.target.getAttribute("data-index"));
+  }
+
+  function dragOverItem(event) {
+    event.preventDefault();
+    event.target.setAttribute("class", "droppable");
+  }
+
+  function dropItem(event) {
+    event.preventDefault();
+    var movedIndex = parseInt(event.dataTransfer.getData("text"));
+    var movedColor = colorData[movedIndex];
+    var droppedIndex = parseInt(event.target.getAttribute("data-index"));
+    colorData.splice(droppedIndex, 0, movedColor);
+    if(movedIndex > droppedIndex){
+      colorData.splice(movedIndex+1, 1);
+    }
+    else {
+      colorData.splice(movedIndex, 1);
+    }
+    for(index=0; index<colorData.length; index++){
+      colorData[index].x = index+1;
+    }
+
+    drawCheckBox();
+    var inputs = document.getElementsByTagName("label");
+      for(index=0; index<inputs.length; index++) {
+      document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
+    }
+    chart.render();
+  }
+
+  function resetStyle(event) {
+    event.target.setAttribute("class", "normal");
   }
 
   window.onload = function () {

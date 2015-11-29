@@ -20,16 +20,6 @@
         <article id="choice2"></article>
       </section>
       <section id="toggle">
-        <label for="red"><input type="checkbox" id="red" checked="true" >red</label>
-        <label for="orange"><input type="checkbox" id="orange" checked="true">orange</label>
-        <label for="yellow"><input type="checkbox" id="yellow" checked="true">yellow</label>
-        <label for="green"><input type="checkbox" id="green" checked="true">green</label>
-        <label for="blue"><input type="checkbox" id="blue" checked="true">blue</label>
-        <label for="indigo"><input type="checkbox" id="indigo" checked="true">indigo</label>
-        <label for="violet"><input type="checkbox" id="violet" checked="true">violet</label>
-        <label for="black"><input type="checkbox" id="black" checked="true">black</label>
-        <label for="white"><input type="checkbox" id="white" checked="true">white</label>
-        <label for="gray"><input type="checkbox" id="gray" checked="true">gray</label>
       </section>
       <section id="chartContainer"></section>
     </main>
@@ -38,15 +28,6 @@
       <br>
       <p>&copy; 2015 Danielle H.</p>
     </footer>
-
-    <script type="text/javascript">
-      newChoices();
-      /***Event Listener for color checkboxes***/
-      var inputs = document.getElementsByTagName("label");
-      for(index=0; index<inputs.length; index++) {
-      document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
-      }
-    </script>
 
   </body>
 </html>

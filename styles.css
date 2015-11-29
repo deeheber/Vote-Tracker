@@ -48,3 +48,11 @@ button {
   margin: 1% auto;
   padding: 1%;
 }
+
+label {
+  display: inline-block;
+}
+
+.droppable {
+  border: 2px solid blue;
+}
