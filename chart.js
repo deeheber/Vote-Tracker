@@ -1,16 +1,37 @@
+  /*** Data Points for Graph ***/
+  var colorData = loadColors();
+    if (!colorData) {
+      colorData = new Array();
+      colorData.push({ image: "images/red.jpg", label: "red", y: 0 });
+      colorData.push({ image: "images/orange.jpg", label: "orange", y: 0 });
+      colorData.push({ image: "images/yellow.jpg", label: "yellow", y: 0 });
+      colorData.push({ image: "images/green.jpg", label: "green", y: 0 });
+      colorData.push({ image: "images/blue.jpg", label: "blue", y: 0 });
+      colorData.push({ image: "images/indigo.jpg", label: "indigo", y: 0 });
+      colorData.push({ image: "images/violet.jpg", label: "violet", y: 0 });
+      colorData.push({ image: "images/black.jpg", label: "black", y: 0 });
+      colorData.push({ image: "images/white.jpg", label: "white", y: 0 });
+      colorData.push({ image: "images/gray.jpg", label: "gray", y: 0 });
+    }
 
-  /***    Data Points ***/
-  var colorData = new Array();
-  colorData.push({ image: "images/red.jpg", label: "red", y: 18 });
-  colorData.push({ image: "images/orange.jpg", label: "orange", y: 29 });
-  colorData.push({ image: "images/yellow.jpg", label: "yellow", y: 40 });
-  colorData.push({ image: "images/green.jpg", label: "green", y: 34 });
-  colorData.push({ image: "images/blue.jpg", label: "blue", y: 24 });
-  colorData.push({ image: "images/indigo.jpg", label: "indigo", y: 24 });
-  colorData.push({ image: "images/violet.jpg", label: "violet", y: 24 });
-  colorData.push({ image: "images/black.jpg", label: "black", y: 24 });
-  colorData.push({ image: "images/white.jpg", label: "white", y: 24 });
-  colorData.push({ image: "images/gray.jpg", label: "gray", y: 24 });
+  /*** Store Color Data on browser close ***/
+  window.addEventListener("beforeunload", storeColors);
+
+  function storeColors(event) {
+    localStorage.setItem("colorData", JSON.stringify(colorData));
+  }
+
+  function loadColors(event) {
+    //var localColors = new Array();
+    var localColors = JSON.parse(localStorage.getItem("colorData"));
+    if (localColors == null) {
+      return null;
+    }
+    else {
+      return localColors;
+    }
+  }
+
   /***    Chart Object ***/
   var chart = null;
 
