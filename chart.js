@@ -13,6 +13,10 @@
   colorObject.white = { image: "images/white.jpg", label: "white", x: 9, y: 24 };
   colorObject.gray = { image: "images/gray.jpg", label: "gray", x: 10, y: 24 };
   colorData.push(colorObject.red, colorObject.orange, colorObject.yellow, colorObject.green, colorObject.blue, colorObject.indigo, colorObject.violet, colorObject.black, colorObject.white, colorObject.gray);
+
+  /*** Master List to hold references to positions ***/
+  var masterList = colorData.slice(0, colorData.length);
+
   /***    Chart Object ***/
   var chart = null;
 
@@ -61,50 +65,81 @@
 
   /***Hide/Show Colors in the Chart***/
   var priorItemsHidden = new Array();
+
   function toggleColor(color) {
     var selectedItem = document.getElementById(color);
     var selectedArrayItem;
-    //console.log("You picked "+ color +". It is "+ isItChecked.checked);
 
     if (selectedItem.checked == false) {
-       //console.log(color +" is unchecked");
-       selectedItem.setAttribute("checked", "false");
-      for(index=0; index<colorData.length; index++){
+      //console.log(color +" is unchecked");
+      selectedItem.setAttribute("checked", "false");
+      for(var index=0; index<colorData.length; index++){
         if(selectedItem.id == colorData[index].label){
-          //console.log(colorData[index]);
           selectedArrayItem = colorData[index];
         }
       }
+
+      for(var index=0; index<colorData.length; index++) {
+         if (colorData[index].x > selectedArrayItem.x){
+           colorData[index].x = colorData[index].x-1;
+         }
+       }
+       /**Pull selected item from colorData and store in currentHideItem**/
        var currentHideItem = new Array();
        currentHideItem = colorData.slice(colorData.indexOf(selectedArrayItem), colorData.indexOf(selectedArrayItem)+1 );
        priorItemsHidden = priorItemsHidden.concat(currentHideItem);
        colorData.splice(colorData.indexOf(selectedArrayItem), 1);
-       //console.log(priorItemsHidden);
-         // for(index=0; index<colorData.length; index++) {
-         //    colorData[index].x = index+1;
-         // }
        chart.render();
      }
      else {
        //console.log(color + " is checked");
-       selectedItem.setAttribute("checked", "true");
-       for(index=0; index< priorItemsHidden.length; index++){
-          if(selectedItem.id == priorItemsHidden[index].label) {
-            selectedArrayItem = priorItemsHidden[index];
-          }
-       }
-       //colorData.push(colorObject[color]);
-       console.log(selectedArrayItem);
-       colorData.push(selectedArrayItem);
+      selectedItem.setAttribute("checked", "true");
+      for(var index=0; index<priorItemsHidden.length; index++){
+        if(selectedItem.id == priorItemsHidden[index].label) {
+          selectedArrayItem = priorItemsHidden[index];
+          selectedArrayItem.x = getLocation(selectedArrayItem);
+        }
+      }
 
-       // for(index=0; index<colorData.length; index++) {
-       //      colorData[index].x = index+1;
-       //   }
-       chart.render();
-       priorItemsHidden.splice(priorItemsHidden.indexOf(selectedArrayItem), 1);
+      for(var index=0; index<colorData.length; index++) {
+        if (colorData[index].x >= selectedArrayItem.x ) {
+           colorData[index].x = colorData[index].x+1;
+        }
+      }
+      colorData.push(selectedArrayItem);
+      chart.render();
+      priorItemsHidden.splice(priorItemsHidden.indexOf(selectedArrayItem), 1);
      }
 
   }
+
+function getLocation(selectedArrayItem) {
+  for(var index=0; index<masterList.length; index++){
+    console.log("checking Master List "+ index);
+    if(masterList[index] == selectedArrayItem){
+      console.log("found item");
+      if(masterList[index-1]) {
+        console.log("there is an item before");
+        itemBefore = masterList[index-1];
+        console.log("item before is "+itemBefore.label);
+        for(var counter=0; counter<colorData.length; counter++){
+          if(colorData[counter] == itemBefore) {
+            console.log("item is showing");
+            return index+1;
+            /**value might be wrong index+1???**/
+          }
+        }
+        console.log("hidden item");
+        return getLocation(itemBefore);
+
+    }
+      else{
+        console.log("there is not an item before");
+        return 1;
+      }
+    }
+  }
+}
   /***Drag and Drop Stuff***/
 
   window.addEventListener("load", initializeDragItems);
