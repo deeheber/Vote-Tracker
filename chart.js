@@ -113,33 +113,35 @@
 
   }
 
-function getLocation(selectedArrayItem) {
-  for(var index=0; index<masterList.length; index++){
-    console.log("checking Master List "+ index);
-    if(masterList[index] == selectedArrayItem){
-      console.log("found item");
-      if(masterList[index-1]) {
-        console.log("there is an item before");
-        itemBefore = masterList[index-1];
-        console.log("item before is "+itemBefore.label);
-        for(var counter=0; counter<colorData.length; counter++){
-          if(colorData[counter] == itemBefore) {
-            console.log("item is showing");
-            return index+1;
-            /**value might be wrong index+1???**/
+  function getLocation(selectedArrayItem) {
+    for(var index=0; index<masterList.length; index++){
+      console.log("checking Master List "+ index);
+      if(masterList[index] == selectedArrayItem){
+        console.log("found item");
+        if(masterList[index-1]) {
+          console.log("there is an item before");
+          itemBefore = masterList[index-1];
+          console.log("item before is "+itemBefore.label);
+          for(var counter=0; counter<colorData.length; counter++){
+            console.log("checking colorData "+ counter);
+            if(colorData[counter] == itemBefore) {
+              console.log("item is showing");
+              var xValue = colorData[counter].x;
+              return xValue+1;
+              /**getting incorrect placement here originally index+1**/
+            }
           }
-        }
-        console.log("hidden item");
-        return getLocation(itemBefore);
+          console.log("hidden item");
+          return getLocation(itemBefore);
 
-    }
-      else{
-        console.log("there is not an item before");
-        return 1;
+        }
+        else{
+          console.log("there is not an item before");
+          return 1;
+        }
       }
     }
   }
-}
   /***Drag and Drop Stuff***/
 
   window.addEventListener("load", initializeDragItems);
