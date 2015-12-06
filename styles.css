@@ -30,6 +30,10 @@ main {
   display: inline-block;
 }
 
+.droppable {
+  border-left: 2px solid blue;
+}
+
 article {
   display: inline-block;
   width: 25%;
@@ -63,12 +67,83 @@ button:hover {
 }
 
 .canvasjs-chart-container {
-  overflow: hidden;
   height: 25em;
   margin: 1% auto;
   padding: 1%;
 }
 
-.droppable {
-  border-left: 2px solid blue;
+.canvasjs-chart-credit {
+  display:none;
+}
+
+footer {
+  margin-top: 35px;
+  font-size: 100%;
+}
+
+/***Mobile styles***/
+
+@media screen and (max-width: 800px) {
+  #toggle {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 750px) {
+    h2 {
+      font-size: 1.5em;
+    }
+    h3 {
+      font-size: 0.75em;
+      text-shadow: none;
+    }
+    img {
+      height: 60px;
+      width: 100px;
+    }
+    button {
+      font-size: 1.5em;
+      box-shadow: none;
+    }
+    button:hover {
+      font-size: 1.5em;
+    }
+
+    .canvasjs-chart-container {
+      margin: 20px auto;
+      height: 15em;
+      width: 300px;
+    }
+
+    canvas {
+      max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    img {
+      height: 50px;
+      width: 70px;
+    }
+
+    button {
+      font-size: 1.2em;
+    }
+    button:hover {
+      font-size: 1.2em;
+    }
+
+    .canvasjs-chart-container {
+      margin: 20px auto;
+      height: 10em;
+      width: 250px;
+    }
+
+    canvas {
+      max-width: 250px;
+    }
+
 }

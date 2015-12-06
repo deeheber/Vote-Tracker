@@ -3,15 +3,15 @@
   var colorData = new Array();
   var colorObject = {};
   colorObject.red = { image: "images/red.jpg", label: "red", x: 1, y: 18 };
-  colorObject.orange = { image: "images/orange.jpg", label: "orange", x: 2, y: 29 };
-  colorObject.yellow = { image: "images/yellow.jpg", label: "yellow", x: 3, y: 40 };
-  colorObject.green = { image: "images/green.jpg", label: "green", x: 4, y: 34 };
-  colorObject.blue = { image: "images/blue.jpg", label: "blue", x: 5, y: 24 };
-  colorObject.indigo = { image: "images/indigo.jpg", label: "indigo", x: 6, y: 24 };
-  colorObject.violet = { image: "images/violet.jpg", label: "violet", x: 7, y: 24 };
-  colorObject.black = { image: "images/black.jpg", label: "black", x: 8, y: 24 };
-  colorObject.white = { image: "images/white.jpg", label: "white", x: 9, y: 24 };
-  colorObject.gray = { image: "images/gray.jpg", label: "gray", x: 10, y: 24 };
+  colorObject.orange = { image: "images/orange.jpg", label: "orange", x: 2, y: 5 };
+  colorObject.yellow = { image: "images/yellow.jpg", label: "yellow", x: 3, y: 10 };
+  colorObject.green = { image: "images/green.jpg", label: "green", x: 4, y: 7 };
+  colorObject.blue = { image: "images/blue.jpg", label: "blue", x: 5, y: 14 };
+  colorObject.indigo = { image: "images/indigo.jpg", label: "indigo", x: 6, y: 10 };
+  colorObject.violet = { image: "images/violet.jpg", label: "violet", x: 7, y: 12 };
+  colorObject.black = { image: "images/black.jpg", label: "black", x: 8, y: 8 };
+  colorObject.white = { image: "images/white.jpg", label: "white", x: 9, y: 5 };
+  colorObject.gray = { image: "images/gray.jpg", label: "gray", x: 10, y: 13 };
   colorData.push(colorObject.red, colorObject.orange, colorObject.yellow, colorObject.green, colorObject.blue, colorObject.indigo, colorObject.violet, colorObject.black, colorObject.white, colorObject.gray);
 
   /*** Master List to hold references to positions ***/
@@ -222,7 +222,9 @@
 
       title: {text: "Totals"},
 
-      axisX:{interval: 1,},
+      toolTip:{enabled: false},
+
+      axisX:{interval: 1},
 
       data: [//array of dataSeries
         /*** Change type "column" to "bar", "area", "line" or "pie"***/
