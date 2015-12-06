@@ -211,7 +211,7 @@
         // "indigo",
         // "violet",
         "black",
-        "white",
+        //"white",
         "gray"
       ]);
 

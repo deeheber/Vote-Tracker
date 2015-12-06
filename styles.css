@@ -6,19 +6,28 @@ body {
   margin: 3%;
   padding: 1%;
 }
+
+header {
+  text-transform: uppercase;
+}
+
 h2 {
   font-size: 2em;
   margin: 0.5em;
 }
 h3 {
   margin: 0.5em;
+  text-shadow: 3px 3px 5px #888888;
 }
-header {
-  text-transform: uppercase;
-}
+
 main {
   margin: 0 auto;
-  /*border: 1px solid black;*/
+}
+
+#toggle label {
+  margin: 1%;
+  text-transform: capitalize;
+  display: inline-block;
 }
 
 article {
@@ -26,31 +35,38 @@ article {
   width: 25%;
   padding: 2%;
   margin: 2% auto;
-  /*border: 1px solid black;*/
 }
 
 img {
   height: 100px;
   width: 200px;
+  border-radius: 5px;
 }
 
 button {
-  font-size: 1.5em;
+  font-size: 1.2em;
   border-radius: 3px;
   border: 1px solid gray;
   margin-top: 3%;
   text-transform: capitalize;
+  box-shadow: 3px 3px 2px #888888;
+}
+
+button:hover {
+  font-size: 1.2em;
+  border-radius: 3px;
+  border: 1px solid gray;
+  margin-top: 3%;
+  text-transform: capitalize;
+  color: gray;
+  background-color: rgb(253, 246, 227);
 }
 
 .canvasjs-chart-container {
   overflow: hidden;
-  height: 30em;
+  height: 25em;
   margin: 1% auto;
   padding: 1%;
-}
-
-label {
-  display: inline-block;
 }
 
 .droppable {
