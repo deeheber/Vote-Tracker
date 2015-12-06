@@ -106,7 +106,9 @@
            colorData[index].x = colorData[index].x+1;
         }
       }
-      colorData.push(selectedArrayItem);
+      var putBackIndex = selectedArrayItem.x-1;
+      colorData.splice(putBackIndex, 0, selectedArrayItem)
+      //colorData.push(selectedArrayItem);
       chart.render();
       priorItemsHidden.splice(priorItemsHidden.indexOf(selectedArrayItem), 1);
      }
