@@ -30,10 +30,15 @@
   function drawCheckBox() {
     var toggleArea = document.getElementById("toggle");
     toggleArea.innerHTML = "";
-    for(index=0; index<colorData.length; index++){
-      var colorItem = colorData[index];
+    for(var index=0; index<masterList.length; index++){
+      var colorItem = masterList[index];
       var checkBox = "<label for='"+colorItem.label+"' draggable='true' class='normal' data-index="+index+"><input type='checkbox' id='"+colorItem.label+"' checked='true'>"+colorItem.label+"</label>";
       toggleArea.innerHTML += checkBox;
+    }
+    for(var index=0; index<priorItemsHidden.length; index++){
+      var colorName = priorItemsHidden[index].label;
+      document.getElementById(colorName).checked = false;
+      document.getElementById(colorName).setAttribute("checked", "false");
     }
   }
 
@@ -92,11 +97,12 @@
        chart.render();
      }
      else {
-       //console.log(color + " is checked");
+      //console.log(color + " is checked");
       selectedItem.setAttribute("checked", "true");
       for(var index=0; index<priorItemsHidden.length; index++){
         if(selectedItem.id == priorItemsHidden[index].label) {
           selectedArrayItem = priorItemsHidden[index];
+          //console.log("we have a match "+ selectedArrayItem);
           selectedArrayItem.x = getLocation(selectedArrayItem);
         }
       }
@@ -107,7 +113,7 @@
         }
       }
       var putBackIndex = selectedArrayItem.x-1;
-      colorData.splice(putBackIndex, 0, selectedArrayItem)
+      colorData.splice(putBackIndex, 0, selectedArrayItem);
       //colorData.push(selectedArrayItem);
       chart.render();
       priorItemsHidden.splice(priorItemsHidden.indexOf(selectedArrayItem), 1);
@@ -157,7 +163,7 @@
     newChoices();
     /***Event Listener for color checkboxes***/
     var inputs = document.getElementsByTagName("label");
-    for(index=0; index<inputs.length; index++) {
+    for(var index=0; index<inputs.length; index++) {
       document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
     }
   }
@@ -174,22 +180,32 @@
   function dropItem(event) {
     event.preventDefault();
     var movedIndex = parseInt(event.dataTransfer.getData("text"));
-    var movedColor = colorData[movedIndex];
+    var movedColor = masterList[movedIndex];
     var droppedIndex = parseInt(event.target.getAttribute("data-index"));
-    colorData.splice(droppedIndex, 0, movedColor);
+    masterList.splice(droppedIndex, 0, movedColor);
     if(movedIndex > droppedIndex){
-      colorData.splice(movedIndex+1, 1);
+      masterList.splice(movedIndex+1, 1);
     }
     else {
-      colorData.splice(movedIndex, 1);
+      masterList.splice(movedIndex, 1);
     }
-    for(index=0; index<colorData.length; index++){
-      colorData[index].x = index+1;
+    for(var index=0; index<masterList.length; index++){
+      masterList[index].x = index+1;
     }
     drawCheckBox();
     var inputs = document.getElementsByTagName("label");
-    for(index=0; index<inputs.length; index++) {
+    for(var index=0; index<inputs.length; index++) {
       document.getElementsByTagName("input")[index].addEventListener("change", function(){toggleColor(this.id)});
+    }
+    colorData = masterList.slice(0, masterList.length);
+    for(var index=0; index<priorItemsHidden.length; index++){
+      var currentItem = priorItemsHidden[index];
+      colorData.splice(colorData.indexOf(currentItem), 1);
+      for(var counter = 0; counter<colorData.length; counter++) {
+        if (colorData[counter].x > currentItem.x){
+           colorData[counter].x = colorData[counter].x-1;
+         }
+      }
     }
     chart.render();
     newChoices();
