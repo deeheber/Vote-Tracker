@@ -207,6 +207,7 @@
          }
       }
     }
+    chart.options.data[0].dataPoints = colorData;
     chart.render();
     newChoices();
   }
