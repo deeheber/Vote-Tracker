@@ -32,7 +32,7 @@
     toggleArea.innerHTML = "";
     for(index=0; index<colorData.length; index++){
       var colorItem = colorData[index];
-      var checkBox = "<label for='"+colorItem.label+"' draggable='true' class='normal' data-index="+index+"><input type='checkbox' id='"+colorItem.label+"' checked='true'>"+colorItem.label+"</label>";
+      var checkBox = "<label for='"+colorItem.label+"'class='normal' data-index="+index+"><input type='checkbox' id='"+colorItem.label+"' checked='true'>"+colorItem.label+"</label>";
       toggleArea.innerHTML += checkBox;
     }
   }
